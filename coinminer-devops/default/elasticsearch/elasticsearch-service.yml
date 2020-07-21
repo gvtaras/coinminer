@@ -1,0 +1,33 @@
+version: '3'
+services:
+  coinminer-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+    container_name: coinminer-elasticsearch
+    environment:
+      - cluster.name=coinminer-elastic-cluster
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1048m"
+    ports:
+      - 9200:9200
+    volumes:
+      - /opt/coinminer/elasticsearch/data:/usr/share/elasticsearch/data
+      - /opt/coinminer/elasticsearch/logs:/usr/share/elasticsearch/logs
+    networks:
+      - coinminer-network
+
+
+  coinminer-kibana:
+    image: docker.elastic.co/kibana/kibana:7.8.0
+    container_name: coinminer-kibana
+    ports:
+      - 5601:5601
+    depends_on:
+      - coinminer-elasticsearch
+    external_links:
+      - coinminer-elasticsearch:elasticsearch
+    networks:
+      - coinminer-network
+
+networks:
+  coinminer-network:
+    external: true

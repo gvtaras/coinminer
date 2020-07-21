@@ -1,0 +1,19 @@
+version: '3'
+services:
+  coinminer-backend-service:
+    image:  coinminer-backend:latest
+    container_name: coinminer-backend
+    ports:
+      - "8081:8081"
+    environment:
+      - PROPERTY_FILE=application.properties
+      - LOG_FILE_NAME=coinminer-backend
+    volumes:
+      - /opt/coinminer/coinminer-backend/logs:/app/logs
+      - /opt/coinminer/coinminer-backend/conf:/app/conf
+    networks:
+      - coinminer-network
+
+networks:
+  coinminer-network:
+    external: true
