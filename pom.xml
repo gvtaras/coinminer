@@ -14,7 +14,7 @@
 	<groupId>net.tgv</groupId>
 	<artifactId>coinminer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>coinminer umbrella</name>
+	<name>coinminer-umbrella</name>
 	<description>Coinminer Umbrella project</description>
 
     <packaging>pom</packaging>
